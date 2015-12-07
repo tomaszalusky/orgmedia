@@ -96,7 +96,6 @@ public class Canon1Conversion extends Conversion {
 			} else {
 				report.error("preserving directory %s, there are remaining files %s", sourceChild, Arrays.asList(sourceChild.list()));
 			}
-			// TODO reportovat na urovni sourceChild
 			// TODO unit test
 			// TODO rucni test
 			// TODO test na kopii ostrych dat
