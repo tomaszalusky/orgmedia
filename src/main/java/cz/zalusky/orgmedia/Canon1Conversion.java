@@ -31,7 +31,7 @@ public class Canon1Conversion extends Conversion {
 			}
 			Matcher m = DAY_DIRECTORY.matcher(sourceChild.getName());
 			if (!m.matches()) {
-				report.error("file %s is not YYYY_MM_DD, skipped",sourceChild);
+				report.error("directory %s is not YYYY_MM_DD, skipped",sourceChild);
 				continue;
 			}
 			String year = m.group(1);
