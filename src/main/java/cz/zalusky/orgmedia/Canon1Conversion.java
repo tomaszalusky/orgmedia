@@ -72,7 +72,7 @@ public class Canon1Conversion extends Conversion {
 					if (filesWithEqualContent.stream().anyMatch(f -> f.getName().equals(name))) { // same content and name
 						delete(sourceGrandChild, report, "file %s deleted because target exists with same content and name", sourceGrandChild);
 					} else if (!filesWithEqualContent.isEmpty()) { // same content, different name
-						delete(sourceGrandChild, report, "file %s deleted because target exists with same content and different name ", sourceGrandChild,
+						delete(sourceGrandChild, report, "file %s deleted because target exists with same content and different name %s", sourceGrandChild,
 								filesWithEqualContent.stream().map(f -> f.getName()).collect(Collectors.toSet()));
 					} else { // content does not exist in target
 						if (Arrays.stream(targetDayDirectory.listFiles()).anyMatch(f -> f.getName().equals(name))) { // name is already in use -> rename
@@ -96,7 +96,6 @@ public class Canon1Conversion extends Conversion {
 			} else {
 				report.error("preserving directory %s, there are remaining files %s", sourceChild, Arrays.asList(sourceChild.list()));
 			}
-			// TODO unit test
 			// TODO rucni test
 			// TODO test na kopii ostrych dat
 			// TODO spustit na ostrych datech
