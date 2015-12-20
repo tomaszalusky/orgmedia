@@ -92,19 +92,24 @@ public class Canon1Conversion extends Conversion {
 				}
 			}
 			if (sourceChild.listFiles().length == 0) {
-				delete(sourceChild, report, "there was no file remaining in directory");
+				delete(sourceChild, report, "there was no file remaining in directory %s", sourceChild);
 			} else {
 				report.error("preserving directory %s, there are remaining files %s", sourceChild, Arrays.asList(sourceChild.list()));
 			}
-			// TODO rucni test
-			// TODO test na kopii ostrych dat
-			// TODO spustit na ostrych datech
 			// TODO samsungconversion
+			// TODO spustit na ostrych datech
 			// TODO serazeni v ramci adresare
 		}
-		System.out.println(report.getContent());
-		System.out.println("Converting " + source + " to " + target);
+		File logFile = getLogFile(target);
+		report.writeContentToLogFile(logFile,source,target);
+		System.out.println("Converted " + source + " to " + target + " and logged into " + logFile.getAbsolutePath() + ".");
 		return report;
+	}
+
+	private File getLogFile(File target) {
+		String logFileName = getLogFileName();
+		File logFile = new File(target,logFileName);
+		return logFile;
 	}
 
 	private Set<File> findByEqualContent(File dir, File searched) {

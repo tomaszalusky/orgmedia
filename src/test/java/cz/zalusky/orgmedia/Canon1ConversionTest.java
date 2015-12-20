@@ -42,7 +42,7 @@ public class Canon1ConversionTest {
 		prepareSource("file.txt");
 		performConversion();
 		verifyTarget("ERROR: file $SOURCE$\\file.txt is not a directory, skipped");
-		assertEquals(0, target.getRoot().listFiles().length);
+		assertEquals(1, target.getRoot().listFiles().length); // log
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class Canon1ConversionTest {
 		prepareSource("invaliddir/");
 		performConversion();
 		verifyTarget("ERROR: directory $SOURCE$\\invaliddir is not YYYY_MM_DD, skipped");
-		assertEquals(0, target.getRoot().listFiles().length);
+		assertEquals(1, target.getRoot().listFiles().length); // log
 	}
 	
 	@Test
@@ -73,7 +73,7 @@ public class Canon1ConversionTest {
 	public void zbThumbnailInfoDeleted() {
 		prepareSource("2015_12_10/","2015_12_10/ZbThumbnail.info");
 		performConversion();
-		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\ZbThumbnail.info deleted", "OK   : there was no file remaining in directory");
+		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\ZbThumbnail.info deleted", "OK   : there was no file remaining in directory $SOURCE$\\2015_12_10");
 		assertExists("$TARGET$\\201512\\20151210",0);
 		assertNotExists("$SOURCE$\\2015_12_10");
 	}
@@ -82,7 +82,7 @@ public class Canon1ConversionTest {
 	public void thmDeleted() {
 		prepareSource("2015_12_10/","2015_12_10/MVI_1234.THM","2015_12_10/mvi_5678.thm");
 		performConversion();
-		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\MVI_1234.THM deleted", "OK   : file $SOURCE$\\2015_12_10\\mvi_5678.thm deleted", "OK   : there was no file remaining in directory");
+		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\MVI_1234.THM deleted", "OK   : file $SOURCE$\\2015_12_10\\mvi_5678.thm deleted", "OK   : there was no file remaining in directory $SOURCE$\\2015_12_10");
 		assertExists("$TARGET$\\201512\\20151210",0);
 		assertNotExists("$SOURCE$\\2015_12_10");
 	}
@@ -92,7 +92,7 @@ public class Canon1ConversionTest {
 		prepareSource("2015_12_10/","2015_12_10/IMG_1234.JPG~abc");
 		prepareTarget("201512/","201512/20151210/IMG_1234.JPG~abc");
 		performConversion();
-		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG deleted because target exists with same content and name", "OK   : there was no file remaining in directory");
+		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG deleted because target exists with same content and name", "OK   : there was no file remaining in directory $SOURCE$\\2015_12_10");
 		assertExists("$TARGET$\\201512\\20151210",1);
 		assertNotExists("$SOURCE$\\2015_12_10");
 	}
@@ -102,7 +102,7 @@ public class Canon1ConversionTest {
 		prepareSource("2015_12_10/","2015_12_10/IMG_1234.JPG~abc");
 		prepareTarget("201512/","201512/20151210/IMG_5678.JPG~abc");
 		performConversion();
-		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG deleted because target exists with same content and different name [IMG_5678.JPG]", "OK   : there was no file remaining in directory");
+		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG deleted because target exists with same content and different name [IMG_5678.JPG]", "OK   : there was no file remaining in directory $SOURCE$\\2015_12_10");
 		assertExists("$TARGET$\\201512\\20151210",1);
 		assertNotExists("$SOURCE$\\2015_12_10");
 	}
@@ -112,7 +112,7 @@ public class Canon1ConversionTest {
 		prepareSource("2015_12_10/","2015_12_10/IMG_1234.JPG~abc");
 		prepareTarget("201512/","201512/20151210/IMG_1234.JPG~def");
 		performConversion();
-		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG moved into $TARGET$\\201512\\20151210\\IMG_1234_.JPG because source name was in use in target with different content", "OK   : there was no file remaining in directory");
+		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG moved into $TARGET$\\201512\\20151210\\IMG_1234_.JPG because source name was in use in target with different content", "OK   : there was no file remaining in directory $SOURCE$\\2015_12_10");
 		assertExists("$TARGET$\\201512\\20151210",2);
 		assertExists("$TARGET$\\201512\\20151210\\IMG_1234.JPG","def");
 		assertExists("$TARGET$\\201512\\20151210\\IMG_1234_.JPG","abc");
@@ -125,7 +125,7 @@ public class Canon1ConversionTest {
 		prepareTarget("201512/","201512/20151210/IMG_1234.JPG~def");
 		prepareTarget("201512/","201512/20151210/IMG_1234_.JPG~ghi");
 		performConversion();
-		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG moved into $TARGET$\\201512\\20151210\\IMG_1234__.JPG because source name was in use in target with different content", "OK   : there was no file remaining in directory");
+		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG moved into $TARGET$\\201512\\20151210\\IMG_1234__.JPG because source name was in use in target with different content", "OK   : there was no file remaining in directory $SOURCE$\\2015_12_10");
 		assertExists("$TARGET$\\201512\\20151210",3);
 		assertExists("$TARGET$\\201512\\20151210\\IMG_1234.JPG","def");
 		assertExists("$TARGET$\\201512\\20151210\\IMG_1234_.JPG","ghi");
@@ -137,7 +137,7 @@ public class Canon1ConversionTest {
 	public void justMove() throws IOException {
 		prepareSource("2015_12_10/","2015_12_10/IMG_1234.JPG~abc");
 		performConversion();
-		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG moved into $TARGET$\\201512\\20151210\\IMG_1234.JPG", "OK   : there was no file remaining in directory");
+		verifyTarget("OK   : file $SOURCE$\\2015_12_10\\IMG_1234.JPG moved into $TARGET$\\201512\\20151210\\IMG_1234.JPG", "OK   : there was no file remaining in directory $SOURCE$\\2015_12_10");
 		assertExists("$TARGET$\\201512\\20151210",1);
 		assertExists("$TARGET$\\201512\\20151210\\IMG_1234.JPG","abc");
 		assertNotExists("$SOURCE$\\2015_12_10");
@@ -162,7 +162,7 @@ public class Canon1ConversionTest {
 				"OK   : file $SOURCE$\\2015_01_01\\MVI_0575.AVI moved into $TARGET$\\201501\\20150101\\MVI_0575.AVI",
 				"OK   : file $SOURCE$\\2015_01_01\\MVI_0575.THM deleted",
 				"OK   : file $SOURCE$\\2015_01_01\\ZbThumbnail.info deleted",
-				"OK   : there was no file remaining in directory"
+				"OK   : there was no file remaining in directory $SOURCE$\\2015_01_01"
 		);
 		assertExists("$TARGET$\\201501\\20150101",3);
 		assertExists("$TARGET$\\201501\\20150101\\IMG_0573.JPG","abc");
