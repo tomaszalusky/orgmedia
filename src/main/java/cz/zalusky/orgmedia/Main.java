@@ -12,7 +12,8 @@ import com.google.common.collect.ImmutableMap;
 public class Main {
 
 	public static final Map<String,Conversion> conversions = ImmutableMap.of(
-			"canon1",new Canon1Conversion()
+			"canon1",new Canon1Conversion(),
+			"samsung1",new Samsung1Conversion()
 	);
 	
 	public static void main(String[] args) throws IOException {

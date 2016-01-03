@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import com.google.common.io.Files;
 
@@ -73,7 +72,7 @@ public class Canon1Conversion extends Conversion {
 						delete(sourceGrandChild, report, "file %s deleted because target exists with same content and name", sourceGrandChild);
 					} else if (!filesWithEqualContent.isEmpty()) { // same content, different name
 						delete(sourceGrandChild, report, "file %s deleted because target exists with same content and different name %s", sourceGrandChild,
-								filesWithEqualContent.stream().map(f -> f.getName()).collect(Collectors.toSet()));
+								filesWithEqualContent.stream().map(f -> f.getName()).collect(toSet()));
 					} else { // content does not exist in target
 						if (Arrays.stream(targetDayDirectory.listFiles()).anyMatch(f -> f.getName().equals(name))) { // name is already in use -> rename
 							String newName = name;
@@ -96,9 +95,6 @@ public class Canon1Conversion extends Conversion {
 			} else {
 				report.error("preserving directory %s, there are remaining files %s", sourceChild, Arrays.asList(sourceChild.list()));
 			}
-			// TODO samsungconversion
-			// TODO spustit na ostrych datech
-			// TODO serazeni v ramci adresare
 		}
 		File logFile = getLogFile(target);
 		report.writeContentToLogFile(logFile,source,target);
