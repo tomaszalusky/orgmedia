@@ -84,7 +84,6 @@ public class Samsung1Conversion extends Conversion {
 		} else {
 			report.error("preserving directory %s, there are remaining files %s", source, Arrays.asList(source.list()));
 		}
-		// TODO testy
 		// TODO vysusit
 		// TODO spustit na ostrych datech
 		// TODO serazeni v ramci adresare
