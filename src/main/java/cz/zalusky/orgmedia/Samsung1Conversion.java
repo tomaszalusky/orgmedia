@@ -16,7 +16,7 @@ import com.google.common.io.Files;
  */
 public class Samsung1Conversion extends Conversion {
 
-	private static final Pattern VALID_FILES = Pattern.compile("(\\d\\d\\d\\d)(\\d\\d)(\\d\\d)_\\d\\d\\d\\d\\d\\d\\.(jpg|mp4)");
+	private static final Pattern VALID_FILES = Pattern.compile("(\\d\\d\\d\\d)(\\d\\d)(\\d\\d)_\\d\\d\\d\\d\\d\\d(\\(\\d\\))?\\.(jpg|mp4)");
 	
 	@Override
 	public Report execute(File source, File target) {

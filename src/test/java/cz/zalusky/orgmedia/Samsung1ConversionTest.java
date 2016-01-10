@@ -126,6 +126,16 @@ public class Samsung1ConversionTest {
 	}
 
 	@Test
+	public void justMoveVersioned() throws IOException {
+		prepareSource("20151210_010203(0).jpg~abc");
+		performConversion();
+		verifyTarget("OK   : file $SOURCE$\\20151210_010203(0).jpg moved into $TARGET$\\201512\\20151210\\20151210_010203(0).jpg", "OK   : there was no file remaining in directory $SOURCE$");
+		assertExists("$TARGET$\\201512\\20151210",1);
+		assertExists("$TARGET$\\201512\\20151210\\20151210_010203(0).jpg","abc");
+		assertNotExists("$SOURCE$");
+	}
+
+	@Test
 	public void complexTest() throws IOException {
 		prepareSource("20150129_082558.jpg~abc","20150129_082616.jpg~def","20150129_082621.jpg~ghi","20150130_181055.jpg~jkl","20150130_184800.mp4~mno");
 		performConversion();
