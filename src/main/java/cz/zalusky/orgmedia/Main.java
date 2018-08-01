@@ -13,7 +13,8 @@ public class Main {
 
 	public static final Map<String,Conversion> conversions = ImmutableMap.of(
 			"canon1",new Canon1Conversion(),
-			"samsung1",new Samsung1Conversion()
+			"samsung1",new Samsung1Conversion(),
+			"huaweixiaomi1",new HuaweiXiaomi1Conversion()
 	);
 	
 	public static void main(String[] args) throws IOException {
