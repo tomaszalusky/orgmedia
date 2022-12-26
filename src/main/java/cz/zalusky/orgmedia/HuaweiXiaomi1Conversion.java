@@ -16,7 +16,7 @@ import com.google.common.io.Files;
  */
 public class HuaweiXiaomi1Conversion extends Conversion {
 
-	static final Pattern VALID_FILES = Pattern.compile("(IMG|PANO|VID|SL_MO_VID)_(\\d\\d\\d\\d)(\\d\\d)(\\d\\d)_\\d\\d\\d\\d\\d\\d(_HDR|_HHT|_\\d|_BURST\\d\\d\\d(_COVER)?)?\\.(jpg|mp4)");
+	static final Pattern VALID_FILES = Pattern.compile("(IMG|PANO|VID|SL_MO_VID)_(\\d\\d\\d\\d)(\\d\\d)(\\d\\d).*\\.(jpg|mp4)");
 
 	@Override
 	public Report execute(File source, File target) {
